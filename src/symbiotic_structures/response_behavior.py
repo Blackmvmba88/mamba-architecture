@@ -3,7 +3,7 @@ Response Behavior - Define how structures respond to stimuli.
 """
 
 import numpy as np
-from typing import Dict, List, Callable
+from typing import Dict, List, Callable, Tuple
 
 
 class ResponseBehavior:

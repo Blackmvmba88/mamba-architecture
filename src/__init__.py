@@ -1,8 +1,7 @@
 """
-Mamba Architecture - Core Modules
-
-Experimental architecture framework combining art, science, and living design.
+Mamba Architecture - Digital Architectural Environment
+Combining sacred geometry, parametric design, and environmental simulation.
 """
 
-__version__ = "0.1.0"
-__author__ = "Núcleo Mamba"
+__version__ = "1.0.0"
+__author__ = "Mamba Core"

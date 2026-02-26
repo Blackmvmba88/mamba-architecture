@@ -1,158 +1,4 @@
-# Mamba Architecture 🐍✨
-
-**Proyecto experimental del Núcleo Mamba: Arte, Ciencia y Arquitectura Viva**
-
-Arquitectura simbiótica inspirada en la geometría sagrada, biología fractal y flujos naturales. Diseñamos estructuras inteligentes que respiran con la luz, evolucionan con su entorno y expresan conciencia arquitectónica.
-
----
-
-## 🌟 Visión
-
-El Núcleo Mamba trasciende los límites tradicionales de la arquitectura, fusionando:
-
-- **🎨 Arte**: Formas que evocan emoción y conexión espiritual
-- **🔬 Ciencia**: Simulación computacional y biomimética
-- **🏛️ Arquitectura Viva**: Estructuras que respiran, sienten y evolucionan
-
-No construimos objetos estáticos. Creamos ecosistemas arquitectónicos conscientes.
-
----
-
-## 📚 Documentación
-
-### Fundamentos Filosóficos
-
-- **[MANIFESTO.md](MANIFESTO.md)** - Visión, principios y metodología del proyecto
-- **[docs/PHILOSOPHY.md](docs/PHILOSOPHY.md)** - Filosofía profunda y conceptos fundamentales
-
-### Pilares Técnicos
-
-1. **[docs/SACRED_GEOMETRY.md](docs/SACRED_GEOMETRY.md)** - Geometría sagrada y proporciones universales
-2. **[docs/FRACTAL_BIOLOGY.md](docs/FRACTAL_BIOLOGY.md)** - Patrones fractales inspirados en la naturaleza
-3. **[docs/NATURAL_FLOWS.md](docs/NATURAL_FLOWS.md)** - Flujos de aire, agua, luz y calor
-4. **[docs/INTELLIGENT_MATERIALS.md](docs/INTELLIGENT_MATERIALS.md)** - Materiales que responden y adaptan
-
----
-
-## 🛠️ Módulos del Proyecto
-
-### 1. Sacred Geometry (`src/geometry/`)
-
-Implementación de patrones geométricos universales:
-
-- **Proporción Áurea (φ)** y Secuencia de Fibonacci
-- **Espirales** (dorada, Fibonacci, Arquímedes)
-- **Sólidos Platónicos** (tetraedro, cubo, octaedro, dodecaedro, icosaedro)
-- **Flor de la Vida** y patrones de círculos sagrados
-- **Phyllotaxis** (distribución de semillas tipo girasol)
-
-```python
-from geometry.sacred_geometry import SacredGeometry
-
-# Generar espiral áurea
-spiral = SacredGeometry.golden_spiral(turns=3, points_per_turn=100)
-
-# Secuencia de Fibonacci
-fib = SacredGeometry.fibonacci_sequence(15)
-
-# Vértices de sólido platónico
-icosahedron = SacredGeometry.platonic_solid_vertices('icosahedron')
-```
-
-### 2. Fractal Biology (`src/fractals/`)
-
-Generación de patrones fractales biomiméticos:
-
-- **Curva de Koch** (copo de nieve)
-- **Triángulo de Sierpinski**
-- **Sistemas L** (Lindenmayer) para crecimiento de plantas
-- **Árboles fractales** ramificados
-- **Curva del Dragón**
-- **DLA** (Diffusion Limited Aggregation)
-- **Helecho de Barnsley** (IFS)
-- **Conjunto de Mandelbrot**
-
-```python
-from fractals.fractal_generator import FractalGenerator
-
-# Árbol fractal para estructuras de soporte
-tree = FractalGenerator.fractal_tree(iterations=5, angle=30)
-
-# Crecimiento de planta con L-System
-plant = FractalGenerator.plant_growth(iterations=4, angle=25)
-
-# Helecho para ornamentación
-fern = FractalGenerator.barnsley_fern(n_points=10000)
-```
-
-### 3. Natural Flows (`src/flows/`)
-
-Simulación de flujos naturales en arquitectura:
-
-#### Flujo de Aire
-- Efecto chimenea (stack effect)
-- Ventilación natural y cruzada
-- Número de Reynolds (laminar vs turbulento)
-- Presión del viento
-
-#### Flujo de Agua
-- Ecuación de Bernoulli
-- Capilaridad
-- Recolección de agua pluvial
-- Drenaje
-
-#### Flujo de Luz
-- Factor de luz natural
-- Penetración de luz diurna
-- Reflexión y refracción
-- Posición solar
-
-#### Flujo de Calor
-- Conducción, convección, radiación
-- Masa térmica
-- Enfriamiento evaporativo
-- Valor U de muros
-
-```python
-from flows.natural_flows import FlowSimulator, WaterFlow, LightFlow, HeatFlow
-
-# Calcular ventilación natural
-pressure = FlowSimulator.chimney_effect_pressure(height=10, temp_inside=25, temp_outside=15, avg_temp=20)
-flow_rate = FlowSimulator.natural_ventilation_flow_rate(pressure, opening_area=2.0)
-
-# Recolección de agua de lluvia
-water = WaterFlow.rainfall_catchment(area=100, rainfall=50)  # 100m², 50mm
-
-# Factor de luz natural
-df = LightFlow.daylight_factor(indoor_illuminance=500, outdoor_illuminance=10000)
-
-# Enfriamiento evaporativo
-cooling = HeatFlow.evaporative_cooling_potential(air_temp=35, relative_humidity=0.3)
-```
-
----
-
-## 🎯 Ejemplos Prácticos
-
-### Ejecutar Ejemplos
-
-```bash
-# Espiral áurea para diseño de fachadas
-python3 examples/golden_spiral_example.py
-
-# Árbol fractal para estructuras de soporte
-python3 examples/fractal_tree_example.py
-
-# Calculadora de ventilación natural
-python3 examples/ventilation_design_example.py
-```
-
-### Salida de Ejemplo: Golden Spiral
-
-```
-==============================================================
 MAMBA ARCHITECTURE - Golden Spiral Example
-==============================================================
 
 📐 Golden Ratio and Spiral Properties
 --------------------------------------------------------------
@@ -305,3 +151,66 @@ Este proyecto se comparte con el espíritu de colaboración abierta. Consulta LI
 ---
 
 *Parte del ecosistema Mamba: equilibrio entre tecnología, naturaleza y espíritu* 🐍✨🌿
+# Mamba Architecture
+
+**Arquitectura simbiótica inspirada en la geometría sagrada y las formas naturales.**
+
+Mamba Architecture es un laboratorio digital del **Núcleo Mamba**, donde convergen arte, ciencia y tecnología. Su propósito es desarrollar estructuras vivas que evolucionen con su entorno, combinando **geometría sagrada**, **diseño paramétrico**, **simulación ambiental** y **procesos generativos**.
+
+---
+
+## 🌱 Objetivos del Proyecto
+
+1. Crear un entorno arquitectónico digital basado en principios naturales.
+2. Desarrollar un sistema de geometría sagrada que sirva como fundamento matemático y simbólico.
+3. Implementar un motor paramétrico capaz de generar formas orgánicas adaptativas.
+4. Integrar simulaciones ambientales que respondan a luz, viento y temperatura.
+5. Fomentar una filosofía de equilibrio entre tecnología, naturaleza y conciencia.
+
+---
+
+## 🧠 Filosofía
+
+Cada módulo está diseñado como una extensión de los principios universales: proporción áurea, armonía fractal, ritmo y resonancia. El código no solo busca funcionalidad, sino también **belleza estructural**, reflejando la conexión entre mente, forma y entorno.
+
+---
+
+## 🧩 Estructura del Proyecto
+
+```
+/src
+ ├── sacred_geometry/        # Módulos de geometría sagrada (φ, Fibonacci, sólidos platónicos)
+ ├── parametric_design/      # Generadores de formas algorítmicas y superficies adaptativas
+ ├── environmental_simulation/ # Simulaciones de luz, viento y temperatura
+ ├── procedural_generation/  # Scripts de crecimiento orgánico y estructuras vivas
+ ├── organic_models/         # Modelos 3D basados en patrones naturales
+ └── symbiotic_structures/   # Algoritmos de equilibrio y respuesta ambiental
+```
+
+---
+
+## ⚙️ Tecnologías
+
+* **Python** → núcleo lógico y matemático
+* **NumPy / SciPy / Matplotlib** → cálculo, optimización y visualización
+* **Three.js / Blender API (opcional)** → renderizado 3D interactivo
+
+---
+
+## 🌀 Fases del Proyecto
+
+* **Fase 1:** Génesis del Núcleo Digital — creación de módulos base y manifiesto filosófico
+* **Fase 2:** Integración de simulaciones y estructuras paramétricas
+* **Fase 3:** Visualización simbiótica y entorno interactivo 3D
+
+---
+
+## 📜 Roadmap
+
+Ver documento: [`ROADMAP.md`](ROADMAP.md)
+
+---
+
+## ✨ Cierre de Fase 1
+
+Al completar esta fase, se obtendrá un entorno arquitectónico que **piensa, respira y se adapta**. Una manifestación digital del equilibrio entre arte, naturaleza y consciencia: **el primer latido del Núcleo Mamba.**

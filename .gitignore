@@ -16,14 +16,17 @@ parts/
 sdist/
 var/
 wheels/
+pip-wheel-metadata/
+share/python-wheels/
 *.egg-info/
 .installed.cfg
 *.egg
+MANIFEST
 
 # Virtual environments
 venv/
-env/
 ENV/
+env/
 .venv
 
 # IDE
@@ -33,19 +36,34 @@ ENV/
 *.swo
 *~
 
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# Output files
+examples/output/
+*.png
+*.jpg
+*.jpeg
+*.obj
+*.stl
+*.gltf
+*.glb
+
 # OS
 .DS_Store
 Thumbs.db
+
+# Temporary files
+/tmp/
+*.tmp
+*.log
 
 # Testing
 .pytest_cache/
 .coverage
 htmlcov/
 
-# Documentation
+# Documentation build
 docs/_build/
-
-# Temporary files
-/tmp/
-*.tmp
-*.log
+docs/_static/
+docs/_templates/

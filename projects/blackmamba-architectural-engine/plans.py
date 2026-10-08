@@ -24,7 +24,7 @@ for lv,title in enumerate(('Planta baja','Primera planta','Ático conceptual','C
  if lv<2:
   for sign in (-1,1):
    x=x0+(W/2+sign*1.35)*S
-   
+
    for ya,yb in ((-D/2+.3,-2.8),(-1.7,1.8),(2.9,D/2-.3)):ln(x,y0+(D/2-yb)*S,x,y0+(D/2-ya)*S,width=4)
    ln(x0+(T if sign<0 else W/2+1.35)*S,y0+(D/2-1)*S,x0+(W/2-1.35 if sign<0 else W-T)*S,y0+(D/2-1)*S,width=4)
   labels=['Cocina / comedor','Estudio','Salón','Biblioteca'] if lv==0 else ['Dormitorio A','Dormitorio B','Dormitorio C','Baño / vestidor']

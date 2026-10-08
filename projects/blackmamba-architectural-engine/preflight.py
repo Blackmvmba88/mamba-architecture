@@ -43,10 +43,13 @@ def validate(data):
         if axes != sorted(axes):
             errors.append(f"{key}: ordenar ejes de izquierda a derecha")
         width = data.get("width")
-        clearance = data.get("window_width") if key == "window_axes" else 0
+        clearance = data.get("window_width") if key == "window_axes" else 1.65
         if isinstance(width, (int, float)) and not isinstance(width, bool) and isinstance(clearance, (int, float)):
             if width > 0 and clearance > 0 and any(abs(v) + clearance / 2 >= width / 2 for v in axes):
                 errors.append(f"{key}: elemento fuera de la fachada (comprobación aproximada)")
+
+    if isinstance(data.get("seed"), bool) or not isinstance(data.get("seed"), int):
+        errors.append("seed: se requiere entero")
 
     for key in ("camera_location", "camera_target"):
         vec = data.get(key)

@@ -1,10 +1,11 @@
 """Blender 5.2: reproducible conceptual reconstruction. Run with --background --python.
 Front = negative Y; dimensions in metres. No external textures or dependencies.
 """
-import bpy, math, json, random, sys
+import bpy, math, json, random, sys, time, resource
 from pathlib import Path
 from mathutils import Vector
 ROOT=Path(__file__).resolve().parent
+BUILD_STARTED=time.perf_counter()
 P=json.loads((ROOT/'parameters.json').read_text())
 random.seed(P['seed'])
 bpy.ops.wm.read_factory_settings(use_empty=True)
@@ -93,8 +94,8 @@ def window(x,y,z,w=1.15,h=2,side=False,shutters=True):
  c('Stone sill',(0,-.11,-.08),(w+.26,.32,.12),white)
  if shutters:
   for sign in (-1,1):
-   xx=sign*(w/2+.33);c('Shutter',(xx,0,h/2),(.49,.09,h),dark)
-   for j in range(16):c('Shutter louvre',(xx,-.065,.08+j*(h-.16)/15),(.43,.035,.035),dark)
+   xx=sign*(w/2+.18);c('Shutter',(xx,0,h/2),(.28,.09,h),dark)
+   for j in range(16):c('Shutter louvre',(xx,-.065,.08+j*(h-.16)/15),(.24,.035,.035),dark)
  for o in objs:
   lx,ly,lz=o.location
   if side:o.location=(x-ly,y+lx,z+lz);o.rotation_euler.z=math.pi/2
@@ -199,10 +200,14 @@ for i in range(70):
 # Poster refinement remains a separate reproducible module.
 import runpy
 runpy.run_path(str(ROOT/'enhance.py'))['enhance'](ROOT)
+runpy.run_path(str(ROOT/'detail.py'))['detail'](ROOT)
 # Save and render. Architecture objects retained; count provides evidence.
 report={'blender':bpy.app.version_string,'objects_day':len(s.objects),'objects_night':len(night.objects),'mesh_vertices':sum(len(o.data.vertices) for o in s.objects if o.type=='MESH'),'dimensions_m':P,'limitations':['Interior and rear invented','No construction certification; provisional stairs','Snow stylized deterministic patches; no physics','Neighborhood and vehicles are conceptual lower-detail models']}
 (ROOT/'validation.json').write_text(json.dumps(report,indent=2))
 bpy.ops.wm.save_as_mainfile(filepath=str(ROOT/'house.blend'))
+render_metrics=[]
 for scene in (() if '--no-render' in sys.argv else (s,night)):
  if '--preview' in sys.argv:scene.render.resolution_percentage=40;scene.cycles.samples=12
- scene.render.filepath=str(ROOT/(('preview_' if '--preview' in sys.argv else '')+scene.name+'.png'));bpy.ops.render.render(write_still=True,scene=scene.name)
+ scene.render.filepath=str(ROOT/(('preview_' if '--preview' in sys.argv else '')+scene.name+'.png'));t0=time.perf_counter();bpy.ops.render.render(write_still=True,scene=scene.name);render_metrics.append({'scene':scene.name,'seconds':round(time.perf_counter()-t0,3),'samples':scene.cycles.samples,'size':[int(scene.render.resolution_x*scene.render.resolution_percentage/100),int(scene.render.resolution_y*scene.render.resolution_percentage/100)]})
+
+(ROOT/'performance.json').write_text(json.dumps({'blender':bpy.app.version_string,'mode':'preview' if '--preview' in sys.argv else 'no_render' if '--no-render' in sys.argv else 'final','total_seconds':round(time.perf_counter()-BUILD_STARTED,3),'process_peak_rss_mib':round(resource.getrusage(resource.RUSAGE_SELF).ru_maxrss/(1024*1024 if sys.platform=='darwin' else 1024),2),'render_metrics':render_metrics},indent=2))

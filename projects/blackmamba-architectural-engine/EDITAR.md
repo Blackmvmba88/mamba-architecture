@@ -31,3 +31,7 @@ Usa el selector de escena en la barra superior: `winter_day` o `christmas_night`
 ## Guardar tus ajustes
 
 Usa Save As y crea `mi_version.blend`. Los scripts reconstruyen el archivo generado y sustituyen sus entregables; no recuperan cambios manuales. Para cambios repetibles, modifica `parameters.json`, `build.py` o `enhance.py` y vuelve a generar. La distribución interior y las dimensiones siguen siendo hipótesis.
+
+## v0.3
+
+Los vehículos ahora tienen piezas detalladas y el coche queda separado de los escalones. Sus controles siguen siendo `MOVER Auto rojo` y `MOVER Camioneta`. Existe una cámara alternativa `CAMARA Detalle camioneta`; las escenas principales conservan el encuadre vertical. `modules.json` describe los conjuntos editables, no ensambla automáticamente una ciudad.

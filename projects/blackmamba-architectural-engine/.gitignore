@@ -8,3 +8,7 @@ __pycache__/
 .DS_Store
 !winter_day.png
 !christmas_night.png
+
+!before_winter_day.png
+!before_christmas_night.png
+!vehicle_detail.png

@@ -11,10 +11,16 @@
     "shared architectural objects between scenes",
     "transmissive glass and enabled night panes",
     "house movement handle translates foundation correctly",
-    "three tree and two vehicle handles"
+    "three tree and two vehicle handles",
+    "eight tires within 4mm of sampled ground surfaces",
+    "four empty chassis wheel arches",
+    "front shutters do not overlap",
+    "six module manifests with measured bounds",
+    "house and vehicles fully inside main camera",
+    "van fully inside detail camera"
   ],
   "objects": {
-    "christmas_night": 2860,
-    "winter_day": 2349
+    "christmas_night": 3186,
+    "winter_day": 2671
   }
 }

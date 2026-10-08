@@ -214,3 +214,7 @@ Ver documento: [`ROADMAP.md`](ROADMAP.md)
 ## ✨ Cierre de Fase 1
 
 Al completar esta fase, se obtendrá un entorno arquitectónico que **piensa, respira y se adapta**. Una manifestación digital del equilibrio entre arte, naturaleza y consciencia: **el primer latido del Núcleo Mamba.**
+
+## BLACKMAMBA ARCHITECTURAL ENGINE
+
+Reconstrucción residencial paramétrica en Blender, con diez láminas conceptuales y escenas de invierno día/noche. Las dimensiones e interiores son hipótesis explícitas, no planos de obra. Código, parámetros, modelo y documentación en [projects/blackmamba-architectural-engine](projects/blackmamba-architectural-engine/README.md).

@@ -1,0 +1,37 @@
+{
+  "blender": "5.2.0 LTS",
+  "objects_day": 1570,
+  "objects_night": 1641,
+  "mesh_vertices": 22764,
+  "dimensions_m": {
+    "width": 14.4,
+    "depth": 10.8,
+    "wall": 0.3,
+    "base": 0.8,
+    "storey": 3.1,
+    "roof_rise": 3.0,
+    "overhang": 0.45,
+    "window_width": 1.15,
+    "window_height": 2.0,
+    "window_axes": [
+      -5.6,
+      -3.75,
+      -1.9,
+      1.9,
+      3.75,
+      5.6
+    ],
+    "dormer_axes": [
+      -2.8,
+      2.8
+    ],
+    "seed": 88,
+    "status": "ALL DIMENSIONS ESTIMATED; reference images are stylized illustrations, no survey"
+  },
+  "limitations": [
+    "Interior and rear invented",
+    "No construction certification; provisional stairs",
+    "Snow stylized deterministic patches; no physics",
+    "No neighborhood reconstruction in v0.1"
+  ]
+}

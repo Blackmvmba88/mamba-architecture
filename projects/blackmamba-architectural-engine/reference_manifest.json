@@ -1,0 +1,16 @@
+[
+  {
+    "label": "noche",
+    "filename": "ac1fe80c3c2816437507382dd522b89f.jpg",
+    "sha256": "dc31bc70f9e1a455bcef1a86c7c4a9715bdb8c1595e2ca9aa1fdf921ee724f6c",
+    "conversation": "6ac78cd6-7be0-83e8-b18f-c42313bad8dc",
+    "status": "visually inspected; copyrighted illustration, excluded from repository"
+  },
+  {
+    "label": "día",
+    "filename": "06b378bb08d4cc65028c4fd68ec65fc1.jpg",
+    "sha256": "d433c72eba7fd717dda727780a336ef54200ef1c5ca8fa307f52347b7eae7da2",
+    "conversation": "6ac78cd6-7be0-83e8-b18f-c42313bad8dc",
+    "status": "visually inspected; copyrighted illustration, excluded from repository"
+  }
+]

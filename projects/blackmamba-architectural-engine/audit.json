@@ -1,0 +1,18 @@
+{
+  "result": "PASS",
+  "blender": "5.2.0 LTS",
+  "checks": [
+    "two scene names",
+    "384+ shutter louvres",
+    "12 frontal windows clear of masonry",
+    "two slab stairwell openings",
+    "two roof dormer openings",
+    "foundation dimensions agree with parameters",
+    "shared architectural objects between scenes",
+    "transmissive glass and enabled night panes"
+  ],
+  "objects": {
+    "christmas_night": 1641,
+    "winter_day": 1570
+  }
+}

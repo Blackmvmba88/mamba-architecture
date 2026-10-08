@@ -1,0 +1,10 @@
+.env
+.env.*
+__pycache__/
+*.pyc
+*.blend1
+*.blend2
+*.log
+.DS_Store
+!winter_day.png
+!christmas_night.png

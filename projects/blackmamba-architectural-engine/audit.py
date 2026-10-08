@@ -25,5 +25,10 @@ for o in s.objects:
  if o.type=='MESH' and not o.name.startswith('Interior luminous'):assert night.objects.get(o.name)==o
 assert bpy.data.materials['Glazing blue'].node_tree.nodes['Principled BSDF'].inputs['Transmission Weight'].default_value>.9
 assert len([o for o in night.objects if o.name.startswith('Interior luminous') and not o.hide_render])>=12
-report={'result':'PASS','blender':bpy.app.version_string,'checks':['two scene names','384+ shutter louvres','12 frontal windows clear of masonry','two slab stairwell openings','two roof dormer openings','foundation dimensions agree with parameters','shared architectural objects between scenes','transmissive glass and enabled night panes'],'objects':{s.name:len(s.objects) for s in bpy.data.scenes}}
+assert s.get('engine_version')=='0.2'
+handle=bpy.data.objects['MOVER CASA COMPLETA'];child=bpy.data.objects['Foundation'];before=child.matrix_world.translation.copy();old=handle.location.copy();delta=Vector((.6,.2,0));handle.location+=delta;bpy.context.view_layer.update();assert (child.matrix_world.translation-before-delta).length<1e-5;handle.location=old;bpy.context.view_layer.update()
+assert bpy.data.objects['MOVER Auto rojo'].parent is None
+assert bpy.data.objects['MOVER Camioneta'].parent is None
+assert len([o for o in bpy.data.objects if o.name.startswith('MOVER Arbol')])==3
+report={'result':'PASS','blender':bpy.app.version_string,'checks':['two scene names','384+ shutter louvres','12 frontal windows clear of masonry','two slab stairwell openings','two roof dormer openings','foundation dimensions agree with parameters','shared architectural objects between scenes','transmissive glass and enabled night panes','house movement handle translates foundation correctly','three tree and two vehicle handles'],'objects':{s.name:len(s.objects) for s in bpy.data.scenes}}
 (R/'audit.json').write_text(json.dumps(report,indent=2));print(json.dumps(report))

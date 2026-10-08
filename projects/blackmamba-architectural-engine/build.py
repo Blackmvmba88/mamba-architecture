@@ -28,8 +28,11 @@ coord=n.new('ShaderNodeTexCoord');mapping=n.new('ShaderNodeVectorMath');mapping.
 geo=n.new('ShaderNodeNewGeometry');sep=n.new('ShaderNodeSeparateXYZ');comb=n.new('ShaderNodeCombineXYZ');l.new(geo.outputs['Position'],sep.inputs[0]);l.new(sep.outputs['X'],comb.inputs['X']);l.new(sep.outputs['Z'],comb.inputs['Y']);l.new(sep.outputs['Y'],comb.inputs['Z']);l.new(comb.outputs[0],tex.inputs['Vector']);l.new(tex.outputs['Color'],n.get('Principled BSDF').inputs['Base Color']);bump=n.new('ShaderNodeBump');bump.inputs['Strength'].default_value=.25;bump.inputs['Distance'].default_value=.008;l.new(tex.outputs['Fac'],bump.inputs['Height']);l.new(bump.outputs[0],n.get('Principled BSDF').inputs['Normal'])
 
 def cube(name,loc,size,material,bevel=0):
- bpy.ops.mesh.primitive_cube_add(size=1,location=loc);o=bpy.context.object;o.name=name;o.dimensions=size;bpy.ops.object.transform_apply(location=False,rotation=False,scale=True)
- if material:o.data.materials.append(material)
+ # Direct mesh construction avoids thousands of context-dependent operators.
+ verts=[(x*size[0]/2,y*size[1]/2,z*size[2]/2) for x,y,z in ((-1,-1,-1),(1,-1,-1),(1,1,-1),(-1,1,-1),(-1,-1,1),(1,-1,1),(1,1,1),(-1,1,1))]
+ me=bpy.data.meshes.new(name);me.from_pydata(verts,[],[(0,3,2,1),(4,5,6,7),(0,1,5,4),(1,2,6,5),(2,3,7,6),(3,0,4,7)]);me.update()
+ o=bpy.data.objects.new(name,me);s.collection.objects.link(o);o.location=loc
+ if material:me.materials.append(material)
  if bevel:m=o.modifiers.new('Edge detail','BEVEL');m.width=bevel;m.segments=2
  o['source']='inferred conceptual geometry';return o
 
@@ -41,8 +44,14 @@ def line(name,pts,r,material):
  for p,co in zip(sp.points,pts):p.co=(*co,1)
  o=bpy.data.objects.new(name,cu);s.collection.objects.link(o);o.data.materials.append(material);return o
 
+SPHERE_MESHES={}
 def sphere(name,loc,scale,material):
- bpy.ops.mesh.primitive_uv_sphere_add(segments=12,ring_count=8,location=loc);o=bpy.context.object;o.name=name;o.scale=scale;o.data.materials.append(material);return o
+ if material.name not in SPHERE_MESHES:
+  import bmesh
+  me=bpy.data.meshes.new('Shared sphere '+material.name);bm=bmesh.new();bmesh.ops.create_uvsphere(bm,u_segments=12,v_segments=8,radius=1);bm.to_mesh(me);bm.free();me.materials.append(material)
+  for polygon in me.polygons:polygon.use_smooth=True
+  SPHERE_MESHES[material.name]=me
+ o=bpy.data.objects.new(name,SPHERE_MESHES[material.name]);s.collection.objects.link(o);o.location=loc;o.scale=scale;return o
 
 cube('Foundation',(0,0,B/2),(W,D,B),stone,.04)
 for level in range(3):
@@ -187,9 +196,13 @@ for name,loc,energy,col,size in [('Moon',(5,-2,18),1800,(.25,.42,1),15),('Front 
 bulb=mat('Christmas bulbs',(1,.7,.26),emission=8)
 for i in range(70):
  o=sphere('Festoon bulb',(-W/2+i*W/69,-D/2-.2,E),(.065,.065,.065),bulb);s.collection.objects.unlink(o);night.collection.objects.link(o)
+# Poster refinement remains a separate reproducible module.
+import runpy
+runpy.run_path(str(ROOT/'enhance.py'))['enhance'](ROOT)
 # Save and render. Architecture objects retained; count provides evidence.
-report={'blender':bpy.app.version_string,'objects_day':len(s.objects),'objects_night':len(night.objects),'mesh_vertices':sum(len(o.data.vertices) for o in s.objects if o.type=='MESH'),'dimensions_m':P,'limitations':['Interior and rear invented','No construction certification; provisional stairs','Snow stylized deterministic patches; no physics','No neighborhood reconstruction in v0.1']}
+report={'blender':bpy.app.version_string,'objects_day':len(s.objects),'objects_night':len(night.objects),'mesh_vertices':sum(len(o.data.vertices) for o in s.objects if o.type=='MESH'),'dimensions_m':P,'limitations':['Interior and rear invented','No construction certification; provisional stairs','Snow stylized deterministic patches; no physics','Neighborhood and vehicles are conceptual lower-detail models']}
 (ROOT/'validation.json').write_text(json.dumps(report,indent=2))
 bpy.ops.wm.save_as_mainfile(filepath=str(ROOT/'house.blend'))
 for scene in (() if '--no-render' in sys.argv else (s,night)):
- scene.render.filepath=str(ROOT/(scene.name+'.png'));bpy.ops.render.render(write_still=True,scene=scene.name)
+ if '--preview' in sys.argv:scene.render.resolution_percentage=40;scene.cycles.samples=12
+ scene.render.filepath=str(ROOT/(('preview_' if '--preview' in sys.argv else '')+scene.name+'.png'));bpy.ops.render.render(write_still=True,scene=scene.name)

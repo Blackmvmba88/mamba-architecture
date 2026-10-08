@@ -9,10 +9,12 @@
     "two roof dormer openings",
     "foundation dimensions agree with parameters",
     "shared architectural objects between scenes",
-    "transmissive glass and enabled night panes"
+    "transmissive glass and enabled night panes",
+    "house movement handle translates foundation correctly",
+    "three tree and two vehicle handles"
   ],
   "objects": {
-    "christmas_night": 1641,
-    "winter_day": 1570
+    "christmas_night": 2860,
+    "winter_day": 2349
   }
 }

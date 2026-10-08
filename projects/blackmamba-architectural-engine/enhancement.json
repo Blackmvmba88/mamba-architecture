@@ -1,0 +1,27 @@
+{
+  "version": "0.2",
+  "seed": 88,
+  "main_dimensions_unchanged": true,
+  "shared_architecture": true,
+  "reference_guided": [
+    "portrait camera from left",
+    "bare trees",
+    "terraced garden",
+    "arch canopy",
+    "coherent snow",
+    "window fairy lights",
+    "church silhouette",
+    "red car and teal van"
+  ],
+  "inferred": [
+    "all sizes",
+    "neighborhood positions",
+    "vehicle proportions",
+    "tree branching"
+  ],
+  "limits": [
+    "vehicles and neighborhood are simplified blockouts",
+    "no people or proprietary illustration textures",
+    "no exact photo match"
+  ]
+}

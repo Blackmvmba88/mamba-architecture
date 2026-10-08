@@ -1,6 +1,6 @@
-# BLACKMAMBA ARCHITECTURAL ENGINE — v0.1
+# BLACKMAMBA ARCHITECTURAL ENGINE — v0.2
 
-Primera reconstrucción conceptual paramétrica de la casa principal en las dos ilustraciones de invierno. El modelo y diez láminas comparten `parameters.json`. Unidades: metros, Z arriba, frente −Y, origen al centro de la casa. No se conoce orientación geográfica ni escala real.
+Reconstrucción conceptual paramétrica de la casa principal en las dos ilustraciones de invierno. El modelo y diez láminas comparten `parameters.json`. Unidades: metros, Z arriba, frente −Y, origen al centro de la casa. No se conoce orientación geográfica ni escala real.
 
 ## Entregables
 
@@ -38,7 +38,7 @@ Estos intervalos expresan incertidumbre de diseño, no resultados estadísticos.
 
 Muros con huecos vacíos, forjados con hueco de escalera, cubierta con perforaciones de buhardillas, carpintería con jambas, alféizares y divisiones de vidrio; contraventanas con lamas; paneles de puerta, fanlight, arco curvo, cornisa, chimenea, tejas individuales agrupadas en mallas, nieve procedural, topiarios y jardín curvo. El ladrillo usa shader procedural con relieve, **no ladrillos individuales modelados**. La nieve es una cobertura estilizada determinista, no simulación física. Vegetación de detalle básico.
 
-Interiores y trasera son hipótesis útiles para comenzar. El ático queda abierto; los tabiques no son un proyecto ejecutivo. Escalera recta preliminar: 18 peldaños por vuelo, contrahuella 0.1722 m, huella 0.22 m; requiere rediseño, comprobación de altura libre y normativa local antes de uso constructivo. No hay cálculo estructural, instalaciones, impermeabilización, mobiliario, árbol complejo, vehículos ni barrio en esta versión. Cubierta y nieve no resuelven constructivamente encuentros, drenajes o cargas. Los alzados SVG simplifican carpintería y ornamentación y las secciones muestran elementos principales, no todos los detalles de la malla.
+Interiores y trasera son hipótesis útiles para comenzar. El ático queda abierto; los tabiques no son un proyecto ejecutivo. Escalera recta preliminar: 18 peldaños por vuelo, contrahuella 0.1722 m, huella 0.22 m; requiere rediseño, comprobación de altura libre y normativa local antes de uso constructivo. No hay cálculo estructural, instalaciones, impermeabilización ni mobiliario. Árboles ramificados, vehículos y barrio son geometría conceptual de menor detalle que la casa. Cubierta y nieve no resuelven constructivamente encuentros, drenajes o cargas. Los alzados SVG simplifican carpintería y ornamentación y las secciones muestran elementos principales, no todos los detalles de la malla.
 
 ## Reproducir
 
@@ -55,3 +55,14 @@ En otros sistemas reemplazar la ruta por `blender`. Ejecutar scripts de archivos
 ## Infraestructura inspeccionada
 
 Reutilizado `Blackmvmba88/mamba-architecture`, privado: módulos de geometría sagrada, generación procedural y diseño paramétrico; no incluía casa residencial ni archivos `.blend`. Revisado también el exportador biomimético de `3defect`: su base es una forma orgánica genérica, no apropiada como casa; no se alteró ese proyecto. Blender local 5.2.0 disponible y usado para generar archivo y renders. Las referencias originales se consultaron desde los adjuntos de la conversación; no se redistribuyen en GitHub por derechos de autor no establecidos.
+
+
+## Refinamiento v0.2 — composición del cartel
+
+Se mantiene la casa y las medidas aprobadas en v0.1. Se añade encuadre vertical desde la izquierda, nieve continua con volumen, cornisa arqueada más profunda, corona y lazo de puerta, dinteles de ladrillo, buhardillas con molduras, jardineras de mampostería escalonadas y follaje por instancias. Se incorporan tres árboles desnudos ramificados, farolas, un coche rojo, camioneta y volúmenes de casas e iglesia. La noche incorpora cadenas de luces alrededor de ventanas, luz azul y cálida y un brillo moderado de las fuentes emisivas.
+
+La referencia guía composición y ambiente. El barrio, árboles y vehículos son interpretaciones simplificadas, no reconstrucciones exactas. La iglesia se reduce como recurso compositivo: no tiene escala histórica verificable. El material de nieve sigue siendo procedural, no una simulación física. Las imágenes originales no se usan como texturas ni se redistribuyen; se registran sus hashes en `reference_manifest.json`.
+
+`enhance.py` contiene este refinamiento y `build.py` lo aplica automáticamente. Ambos se ejecutan localmente en Blender sin servicios de generación de imagen. Los constructores usan la API de datos y mallas compartidas para evitar operaciones repetidas costosas. Previsualización económica: `blender --background --python build.py -- --preview`. Crea previews al 40% con 12 muestras; el archivo `.blend` guardado conserva la configuración final de 1050 × 1500 y 32 muestras con eliminación de ruido.
+
+Para editar, consulta [EDITAR.md](EDITAR.md). Las colecciones separan casa, nieve, jardines, árboles, barrio, calle y Navidad nocturna. Los controles `MOVER CASA COMPLETA`, `MOVER Arbol ...`, `MOVER Auto rojo` y `MOVER Camioneta` permiten transformar conjuntos completos. Guarda los cambios manuales en una copia: regenerar sustituye el archivo generado.

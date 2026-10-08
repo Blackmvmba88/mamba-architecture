@@ -1,8 +1,8 @@
 {
   "blender": "5.2.0 LTS",
-  "objects_day": 1570,
-  "objects_night": 1641,
-  "mesh_vertices": 22764,
+  "objects_day": 2349,
+  "objects_night": 2860,
+  "mesh_vertices": 47468,
   "dimensions_m": {
     "width": 14.4,
     "depth": 10.8,
@@ -26,12 +26,26 @@
       2.8
     ],
     "seed": 88,
-    "status": "ALL DIMENSIONS ESTIMATED; reference images are stylized illustrations, no survey"
+    "status": "ALL DIMENSIONS ESTIMATED; reference images are stylized illustrations, no survey",
+    "camera_location": [
+      -27,
+      -47,
+      34
+    ],
+    "camera_target": [
+      0,
+      5,
+      6.5
+    ],
+    "camera_ortho_scale": 38,
+    "render_width": 1050,
+    "render_height": 1500,
+    "render_samples": 32
   },
   "limitations": [
     "Interior and rear invented",
     "No construction certification; provisional stairs",
     "Snow stylized deterministic patches; no physics",
-    "No neighborhood reconstruction in v0.1"
+    "Neighborhood and vehicles are conceptual lower-detail models"
   ]
 }

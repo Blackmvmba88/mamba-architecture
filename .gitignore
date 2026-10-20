@@ -67,3 +67,7 @@ htmlcov/
 docs/_build/
 docs/_static/
 docs/_templates/
+
+# Architecture Lab generated artifacts
+out/
+*.blend1

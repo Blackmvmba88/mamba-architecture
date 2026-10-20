@@ -1,0 +1,28 @@
+name: Architecture Lab unit tests
+on:
+  push:
+    paths:
+      - "lab/**"
+      - ".github/workflows/architecture-lab-tests.yml"
+  pull_request:
+    paths:
+      - "lab/**"
+      - ".github/workflows/architecture-lab-tests.yml"
+  workflow_dispatch:
+jobs:
+  unit-tests:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    strategy:
+      matrix:
+        python-version: ["3.11", "3.12"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Python unit tests
+        run: python -m unittest discover -s lab/tests -v
+      - name: Compile lab modules
+        run: python -m compileall -q lab

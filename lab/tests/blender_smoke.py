@@ -16,11 +16,14 @@ reports = []
 for style in STYLES:
     data = generate_style(style, 6)
     target = output / f'{style}.blend'
-    report = build(data, target, height_m=3)
+    report = build(data, target, height_m=3, typology=True)
     bpy.ops.wm.open_mainfile(filepath=str(target.resolve()))
     obj = bpy.data.objects['Conceptual_Radial_Plan']
     assert json.loads(obj['source_parameters_json']) == json.loads(json.dumps(data))
-    assert math.isclose(max(v.co.z for v in obj.data.vertices), 3)
+    params = json.loads(obj['typology_parameters_json'])
+    assert params['style_id'] == style
+    expected_height = 3 if report['typology'] == 'annular_courtyard' else 5
+    assert math.isclose(max(v.co.z for v in obj.data.vertices), expected_height)
     assert len(obj.data.vertices) == report['vertices']
     assert len(obj.data.polygons) == report['faces']
     import bmesh

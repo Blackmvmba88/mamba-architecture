@@ -59,3 +59,32 @@ parámetros, altura, topología y volumen; requiere Blender instalado. La suite
 unitaria se ejecuta por separado y no demuestra por sí sola integración Blender.
 Los archivos existentes `.blend` no se sobrescriben. Usa una carpeta nueva al
 repetir la prueba.
+
+## Masas por tipología (siguiente iteración)
+
+`--typology` usa la geometría del catálogo para elegir entre cuatro masas:
+
+| Geometría de catálogo | Masa generada |
+| --- | --- |
+| `radial_dome`, `circular_pavilion` | Tambor y casquete elipsoidal discretizado |
+| `geodesic_shell` | Casquete facetado con paneles triangulares; no es una malla geodésica de icosaedro |
+| `rectilinear` | Volumen cuadrado con cubierta a dos aguas |
+| `courtyard` | Volumen anular con vacío central abierto al cielo |
+
+```bash
+blender --background --python-exit-code 1 --python lab/blender_radial.py -- --input out/style.json --output out/typology.blend --typology --height 3 --roof-rise 2 --courtyard-ratio 0.4 --report out/typology-report.json
+blender --background --python-exit-code 1 --python lab/tests/blender_smoke.py -- out/typology-smoke
+```
+
+`--height` mide el tambor o muro; `--roof-rise` añade altura de cubierta donde
+corresponde. `--courtyard-ratio` es radio interior/exterior en patios. El radio
+es el circunradio de masas circulares y la mitad del lado en la villa cuadrada.
+Los parámetros efectivos quedan guardados en `typology_parameters_json`.
+Las métricas describen la masa digital cerrada, no superficie habitable ni
+volumen de materiales. Las familias pueden compartir masa; ornamentación,
+vitrales, óculos, vegetación y agua continúan como metadatos.
+
+Validación local: 17 pruebas unitarias; siete archivos guardados y reabiertos en
+Blender 5.2, con comprobación de coordenadas, parámetros, altura, cierre y volumen.
+Las pruebas unitarias contrastan el volumen orientado de las caras con fórmulas
+independientes de prisma, cubierta y troncos de cono, en resoluciones 6, 24 y 128.

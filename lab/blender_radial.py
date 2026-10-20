@@ -36,13 +36,20 @@ def prism_geometry(points, height_m):
     return vertices, faces
 
 
-def build(data, output, height_m=None):
+def build(data, output, height_m=None, typology=False, roof_rise_m=2.0, courtyard_ratio=0.4):
     import bpy
     points=validate(data)
     # Isolated in a new Blender process: never clear or overwrite user-open scenes.
     bpy.ops.wm.read_factory_settings(use_empty=True)
     mesh=bpy.data.meshes.new("RadialPlan")
-    if height_m is None:
+    model = None
+    if typology:
+        from lab.typology_geometry import generate_typology
+        model = generate_typology(data['style']['id'], data['geometry']['radius_m'],
+                                  height_m if height_m is not None else 3.0, len(points),
+                                  roof_rise_m, courtyard_ratio)
+        vertices, faces, edges = model['vertices'], model['faces'], []
+    elif height_m is None:
         vertices = [tuple(p) for p in points] + [(0, 0, 0)]
         edges = data["geometry"]["ring_edges"] + data["geometry"]["radial_edges"]
         faces = []
@@ -58,6 +65,9 @@ def build(data, output, height_m=None):
     obj["source_parameters_json"] = json.dumps(data, sort_keys=True)
     if height_m is not None:
         obj["height_m"] = height_m
+    if model:
+        obj["typology_parameters_json"] = json.dumps(model['parameters'], sort_keys=True)
+        obj["typology"] = model['kind']
     bpy.context.scene.unit_settings.system = "METRIC"
     bpy.context.scene.unit_settings.scale_length = 1.0
     output=Path(output)
@@ -66,9 +76,10 @@ def build(data, output, height_m=None):
     if output.exists():
         raise FileExistsError("refusing to overwrite an existing .blend file")
     output.parent.mkdir(parents=True,exist_ok=True)
-    measured=[[round(v.co.x,6),round(v.co.y,6),round(v.co.z,6)] for v in obj.data.vertices]
-    expected=[[round(float(v),6) for v in p] for p in vertices]
-    if measured!=expected:
+    measured=[list(v.co) for v in obj.data.vertices]
+    expected=[[float(v) for v in p] for p in vertices]
+    if any(not math.isclose(actual, target, rel_tol=1e-7, abs_tol=1e-6)
+           for point, source in zip(measured, expected) for actual, target in zip(point, source)):
         raise RuntimeError("Blender measured geometry differs from source")
     area = abs(sum(points[i][0]*points[(i+1)%len(points)][1] - points[(i+1)%len(points)][0]*points[i][1] for i in range(len(points)))) / 2
     import bmesh
@@ -77,10 +88,12 @@ def build(data, output, height_m=None):
     volume = abs(bm.calc_volume(signed=True)) if faces else None
     closed = all(e.is_manifold for e in bm.edges) if faces else False
     bm.free()
-    if faces and (not closed or not math.isclose(volume, area*height_m, rel_tol=1e-6)):
-        raise RuntimeError("Blender volume/topology differs from expected prism")
+    expected_volume = model['expected_volume_m3'] if model else area*height_m if faces else None
+    if faces and (not closed or not math.isclose(volume, expected_volume, rel_tol=1e-6)):
+        raise RuntimeError("Blender volume/topology differs from expected mass")
     bpy.ops.wm.save_as_mainfile(filepath=str(output.resolve()))
-    return {"footprint_area_m2": area, "volume_m3": volume, "closed_manifold": closed,
+    return {"typology": model['kind'] if model else 'radial_prism' if faces else 'radial_plan',
+            "footprint_area_m2": model['footprint_area_m2'] if model else area, "volume_m3": volume, "closed_manifold": closed,
             "height_m": height_m, "faces": len(mesh.polygons), "source_style":data["style"]["id"],"vertices":len(measured),
             "edges":len(mesh.edges),"geometry_match":True,"build_ready":False}
 
@@ -89,11 +102,15 @@ def main():
     p.add_argument("--input",type=Path,required=True)
     p.add_argument("--output",type=Path,required=True)
     p.add_argument("--report",type=Path)
+    p.add_argument("--typology", action="store_true", help="Generate the style's conceptual mass")
+    p.add_argument("--roof-rise", type=float, default=2.0)
+    p.add_argument("--courtyard-ratio", type=float, default=0.4)
     p.add_argument("--height", type=float, help="Optional closed radial prism height in meters")
     args=p.parse_args(sys.argv[sys.argv.index('--')+1:] if '--' in sys.argv else sys.argv[1:])
     if args.report and args.report.exists():
         raise FileExistsError("refusing to overwrite existing report")
-    result=build(json.loads(args.input.read_text(encoding="utf-8")),args.output, args.height)
+    sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+    result=build(json.loads(args.input.read_text(encoding="utf-8")),args.output, args.height, args.typology, args.roof_rise, args.courtyard_ratio)
     if args.report:
         if args.report.exists():
             raise FileExistsError("refusing to overwrite existing report")

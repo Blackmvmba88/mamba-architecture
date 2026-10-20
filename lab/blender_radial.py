@@ -2,6 +2,7 @@
 import argparse
 import json
 import math
+import sys
 from pathlib import Path
 
 def validate(data):
@@ -53,7 +54,7 @@ def main():
     p.add_argument("--input",type=Path,required=True)
     p.add_argument("--output",type=Path,required=True)
     p.add_argument("--report",type=Path)
-    args=p.parse_args()
+    args=p.parse_args(sys.argv[sys.argv.index('--')+1:] if '--' in sys.argv else sys.argv[1:])
     result=build(json.loads(args.input.read_text(encoding="utf-8")),args.output)
     if args.report:
         if args.report.exists():

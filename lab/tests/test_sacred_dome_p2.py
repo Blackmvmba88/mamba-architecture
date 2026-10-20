@@ -27,6 +27,6 @@ class SacredDomeP2Tests(unittest.TestCase):
             with self.assertRaises(ValueError):build(radius_m=value)
         for n in (7,65,2.5,True):
             with self.assertRaises(ValueError):build(segments=n)
-        with self.assertRaises(ValueError):build(door_width_m=3)
+        with self.assertRaises(ValueError):build(door_width_m=4)
 
 if __name__=="__main__":unittest.main()

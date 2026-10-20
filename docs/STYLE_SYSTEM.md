@@ -37,3 +37,25 @@ python3 -m unittest discover -s lab/tests -v
 5. Exigir cálculo profesional para cargas, uniones, incendios, accesibilidad y obras reales.
 
 **Gate actual: P0 — intención formal y parámetros, sin validación de ingeniería.**
+
+## Blender: volumen radial editable y medición
+
+El adaptador conserva el esquema plano por defecto. `--height 3` añade un
+prisma radial cerrado de 3 m de altura, con caras editables. Es una envolvente
+conceptual común a los siete estilos: todavía no implementa sus tipologías,
+cubiertas, materiales ni aperturas particulares.
+
+```bash
+python3 -m lab.styled_habitat --style sacred_dome --radius 6 --segments 12 --output out/style.json
+blender --background --python lab/blender_radial.py -- --input out/style.json --output out/style.blend --height 3 --report out/measurement.json
+blender --background --python lab/tests/blender_smoke.py -- out/blender-smoke
+```
+
+La escena usa metros y conserva el JSON de origen en `source_parameters_json`.
+El reporte mide área poligonal de huella y volumen de malla, verifica coordenadas
+y comprueba cierre manifold. El área corresponde al polígono discretizado, no
+al círculo ideal. La prueba Blender guarda y reabre los siete estilos, verifica
+parámetros, altura, topología y volumen; requiere Blender instalado. La suite
+unitaria se ejecuta por separado y no demuestra por sí sola integración Blender.
+Los archivos existentes `.blend` no se sobrescriben. Usa una carpeta nueva al
+repetir la prueba.

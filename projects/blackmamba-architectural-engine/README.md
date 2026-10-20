@@ -1,4 +1,4 @@
-# BLACKMAMBA ARCHITECTURAL ENGINE — v0.2
+# BLACKMAMBA ARCHITECTURAL ENGINE — v0.3
 
 Reconstrucción conceptual paramétrica de la casa principal en las dos ilustraciones de invierno. El modelo y diez láminas comparten `parameters.json`. Unidades: metros, Z arriba, frente −Y, origen al centro de la casa. No se conoce orientación geográfica ni escala real.
 
@@ -66,3 +66,29 @@ La referencia guía composición y ambiente. El barrio, árboles y vehículos so
 `enhance.py` contiene este refinamiento y `build.py` lo aplica automáticamente. Ambos se ejecutan localmente en Blender sin servicios de generación de imagen. Los constructores usan la API de datos y mallas compartidas para evitar operaciones repetidas costosas. Previsualización económica: `blender --background --python build.py -- --preview`. Crea previews al 40% con 12 muestras; el archivo `.blend` guardado conserva la configuración final de 1050 × 1500 y 32 muestras con eliminación de ruido.
 
 Para editar, consulta [EDITAR.md](EDITAR.md). Las colecciones separan casa, nieve, jardines, árboles, barrio, calle y Navidad nocturna. Los controles `MOVER CASA COMPLETA`, `MOVER Arbol ...`, `MOVER Auto rojo` y `MOVER Camioneta` permiten transformar conjuntos completos. Guarda los cambios manuales en una copia: regenerar sustituye el archivo generado.
+
+
+## Ejecución v0.3 — PR #4
+
+Esta revisión se ejecutó en el Mac local con Blender 5.2.0. Se conserva la casa y su escala conceptual; el generador trabaja en una carpeta nueva para proteger v0.2 y archivos editados manualmente.
+
+`detail.py` corrige la proyección del ladrillo en fachadas laterales, reemplaza vehículos por carrocerías con parabrisas inclinados y huecos reales de rueda, añade neumáticos, rines, espejos, parrillas, placas, faros y tubos de la camioneta. Reemplaza las ramas lineales por curvas Bézier con grosor variable y ramificación jerárquica, agrega bordillos y banquetas, y modula rugosidad del asfalto. El bordillo y la nieve del borde se abren frente al acceso. Las contraventanas se estrechan para evitar que se interpenetren entre ventanas contiguas.
+
+Los vehículos mantienen sus controles y son interpretaciones, no réplicas de fabricante. El barrio periférico sigue siendo de menor detalle. Nieve y cubiertas aún son estilizadas y requieren detalles de encuentros constructivos si se usan para diseño técnico. No hay personas ni levantamiento dimensional.
+
+`preflight.py` valida entradas antes de usar Blender y ahora comprueba semilla entera y posición aproximada de buhardillas. `test_preflight.py` prueba seis casos, incluidos parámetros incorrectos. `audit.py` verifica también ruedas respecto al pavimento, huecos de carrocería, contraventanas sin solape y el manifiesto de seis módulos editables. `modules.json` registra dimensiones obtenidas de vértices editables y envolventes conservadoras de curvas en ejes mundiales, incluidos accesorios; no son dimensiones nominales de arquitectura.
+
+`performance.json` registra tiempos de esta ejecución y memoria máxima RSS del proceso, no memoria de GPU. `before_winter_day.png` y `before_christmas_night.png` corresponden a v0.2; los renders actuales conservan cámara, encuadre y escala para comparación. La guía de edición y los controles siguen disponibles en `EDITAR.md`.
+
+```sh
+python3 preflight.py
+python3 test_preflight.py
+blender --background --python build.py -- --preview
+blender --background --python build.py
+blender --background house.blend --python audit.py
+blender --background house.blend --python render.py
+```
+
+`render.py` produce las dos escenas y una vista cercana `vehicle_detail.png`; agrega una cámara alternativa al archivo manteniendo las cámaras principales.
+
+Los scripts reemplazan exclusivamente sus entregables generados. Usa una copia para proteger ajustes manuales. Revisa `QUALITY_V03.md`, `audit.json` y `performance.json` para evidencia y límites de esta revisión.

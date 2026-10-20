@@ -35,5 +35,15 @@
   "camera_ortho_scale": 38,
   "render_width": 1050,
   "render_height": 1500,
-  "render_samples": 32
+  "render_samples": 32,
+  "car_location": [
+    3.8,
+    -10.5,
+    0
+  ],
+  "van_location": [
+    -8,
+    -16,
+    0
+  ]
 }

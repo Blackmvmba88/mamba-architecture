@@ -1,0 +1,16 @@
+{
+  "version": "0.3",
+  "changes": [
+    "side brick projection corrected",
+    "sloped vehicle glazing, rims, tires, mirrors and lamps",
+    "curved tapered trees with hierarchical branching",
+    "curbs and sidewalks",
+    "wet asphalt roughness variation"
+  ],
+  "main_dimensions_unchanged": true,
+  "limits": [
+    "context buildings remain simplified",
+    "no people, exact survey or engineering validation",
+    "vehicles are interpretations, not manufacturer models"
+  ]
+}

@@ -1,0 +1,95 @@
+{
+  "version": "0.3",
+  "preflight": "PASS",
+  "input_regression_tests": 6,
+  "saved_blend_audit": {
+    "result": "PASS",
+    "blender": "5.2.0 LTS",
+    "checks": [
+      "two scene names",
+      "384+ shutter louvres",
+      "12 frontal windows clear of masonry",
+      "two slab stairwell openings",
+      "two roof dormer openings",
+      "foundation dimensions agree with parameters",
+      "shared architectural objects between scenes",
+      "transmissive glass and enabled night panes",
+      "house movement handle translates foundation correctly",
+      "three tree and two vehicle handles",
+      "eight tires within 4mm of sampled ground surfaces",
+      "four empty chassis wheel arches",
+      "front shutters do not overlap",
+      "six module manifests with measured bounds",
+      "house and vehicles fully inside main camera",
+      "van fully inside detail camera"
+    ],
+    "objects": {
+      "christmas_night": 3186,
+      "winter_day": 2671
+    }
+  },
+  "reconstruction_from_zero": "PASS",
+  "module_bounds_reproduce_within_m": 0.001,
+  "note": "reproducibility tolerance, not accuracy of the building dimensions",
+  "render_performance": {
+    "blender": "5.2.0 LTS",
+    "mode": "final",
+    "stage": "renders of audited saved scene",
+    "total_seconds": 82.35,
+    "process_peak_rss_mib": 1452.0,
+    "render_metrics": [
+      {
+        "scene": "christmas_night",
+        "seconds": 43.5,
+        "samples": 32,
+        "size": [
+          1050,
+          1500
+        ]
+      },
+      {
+        "scene": "winter_day",
+        "seconds": 27.02,
+        "samples": 32,
+        "size": [
+          1050,
+          1500
+        ]
+      },
+      {
+        "scene": "vehicle_detail",
+        "seconds": 11.615,
+        "samples": 24,
+        "size": [
+          1050,
+          700
+        ]
+      }
+    ],
+    "additional_passes": [
+      {
+        "name": "vehicle_detail_reframe",
+        "seconds": 9.313,
+        "process_peak_rss_mib": 1258.86
+      }
+    ]
+  },
+  "deliverables": {
+    "house.blend": {
+      "bytes": 1150162,
+      "sha256": "ce87c69c0be8bf42ad11aa86388738ae8e0105f01fdacc7197230e2ca324608a"
+    },
+    "winter_day.png": {
+      "bytes": 2223700,
+      "sha256": "4e4a7dcc96ad9d53c7ab9c6eddb1f5b85fa35201d51dcd49d4a94c4cd068352d"
+    },
+    "christmas_night.png": {
+      "bytes": 2211812,
+      "sha256": "d8db0f5d269ff64c8d9e6bc755383ad16ac80f3e2a1254171d551bbb44656ce0"
+    },
+    "vehicle_detail.png": {
+      "bytes": 902511,
+      "sha256": "9ae4fbecdb6c436bc38a9d213174beabc632836b1c1485e6e50e8d616ea14639"
+    }
+  }
+}

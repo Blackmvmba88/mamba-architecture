@@ -1,0 +1,43 @@
+{
+  "blender": "5.2.0 LTS",
+  "mode": "final",
+  "stage": "renders of audited saved scene",
+  "total_seconds": 82.35,
+  "process_peak_rss_mib": 1452.0,
+  "render_metrics": [
+    {
+      "scene": "christmas_night",
+      "seconds": 43.5,
+      "samples": 32,
+      "size": [
+        1050,
+        1500
+      ]
+    },
+    {
+      "scene": "winter_day",
+      "seconds": 27.02,
+      "samples": 32,
+      "size": [
+        1050,
+        1500
+      ]
+    },
+    {
+      "scene": "vehicle_detail",
+      "seconds": 11.615,
+      "samples": 24,
+      "size": [
+        1050,
+        700
+      ]
+    }
+  ],
+  "additional_passes": [
+    {
+      "name": "vehicle_detail_reframe",
+      "seconds": 9.313,
+      "process_peak_rss_mib": 1258.86
+    }
+  ]
+}

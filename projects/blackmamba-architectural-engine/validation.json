@@ -1,8 +1,8 @@
 {
   "blender": "5.2.0 LTS",
-  "objects_day": 2349,
-  "objects_night": 2860,
-  "mesh_vertices": 47468,
+  "objects_day": 2670,
+  "objects_night": 3185,
+  "mesh_vertices": 49512,
   "dimensions_m": {
     "width": 14.4,
     "depth": 10.8,
@@ -40,7 +40,17 @@
     "camera_ortho_scale": 38,
     "render_width": 1050,
     "render_height": 1500,
-    "render_samples": 32
+    "render_samples": 32,
+    "car_location": [
+      3.8,
+      -10.5,
+      0
+    ],
+    "van_location": [
+      -8,
+      -16,
+      0
+    ]
   },
   "limitations": [
     "Interior and rear invented",

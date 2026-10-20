@@ -10,7 +10,7 @@ def start(title):
  global out
  out=['<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="800" viewBox="0 0 1100 800"><rect width="1100" height="800" fill="#faf8f1"/><g font-family="Arial">'];txt(35,40,'BLACKMAMBA ARCHITECTURAL ENGINE',23);txt(35,68,title,19);txt(35,95,'CONCEPTUAL • Todas las medidas estimadas • Metros • Frente = −Y • Sin norte geográfico',13)
 def end(name):
- txt(35,748,'v0.2 | Referencias ilustradas día/noche | Interiores y fachadas ocultas: hipótesis | No apto para obra',13)
+ txt(35,748,'v0.3 | Referencias ilustradas día/noche | Interiores y fachadas ocultas: hipótesis | No apto para obra',13)
  ln(35,701,35+5*S,701,width=3)
  for i in range(6):ln(35+i*S,695,35+i*S,707);txt(35+i*S,723,str(i),10)
  txt(230,723,'m — usar barra gráfica al imprimir',10);out.append('</g></svg>');(R/(name+'.svg')).write_text(''.join(out))

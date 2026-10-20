@@ -1,0 +1,205 @@
+[
+  {
+    "id": "MOVER CASA COMPLETA",
+    "kind": "residence",
+    "version": "0.3",
+    "origin": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "dimensions_m": [
+      15.699999809265137,
+      16.709999561309814,
+      10.818333700299263
+    ],
+    "bounds_method": "editable mesh vertices and conservative curve control hulls with bevel radius, in world axes; scene-independent parent transforms",
+    "anchors": {
+      "origin": [
+        0,
+        0,
+        0
+      ]
+    },
+    "materials": [
+      "Brick fired red",
+      "Door walnut",
+      "Glazing blue",
+      "Ivory fairy lights",
+      "Limestone",
+      "Paint ivory",
+      "Shutters forest black",
+      "Slate brown",
+      "Snow",
+      "Warm interior",
+      "Winter shrubs",
+      "Wreath ribbon burgundy"
+    ],
+    "lod": "conceptual_detail",
+    "dependencies": [],
+    "evidence": "illustration guided; dimensions inferred"
+  },
+  {
+    "id": "MOVER Auto rojo",
+    "kind": "vehicle",
+    "version": "0.3",
+    "origin": [
+      3.799999952316284,
+      -10.5,
+      0.0
+    ],
+    "dimensions_m": [
+      4.097499847412109,
+      2.3700008392333984,
+      1.6329999659210443
+    ],
+    "bounds_method": "editable mesh vertices and conservative curve control hulls with bevel radius, in world axes; scene-independent parent transforms",
+    "anchors": {
+      "origin": [
+        0,
+        0,
+        0
+      ]
+    },
+    "materials": [
+      "Car red lacquer",
+      "Paint ivory",
+      "Shutters forest black",
+      "Tire rubber",
+      "v03 brushed metal",
+      "v03 rear red lens",
+      "v03 vehicle smoked glazing",
+      "v03 warm lamp"
+    ],
+    "lod": "conceptual_detail",
+    "dependencies": [],
+    "evidence": "illustration guided; dimensions inferred"
+  },
+  {
+    "id": "MOVER Camioneta",
+    "kind": "vehicle",
+    "version": "0.3",
+    "origin": [
+      -8.0,
+      -16.0,
+      0.0
+    ],
+    "dimensions_m": [
+      4.997498989105225,
+      2.369999885559082,
+      2.3779998663812876
+    ],
+    "bounds_method": "editable mesh vertices and conservative curve control hulls with bevel radius, in world axes; scene-independent parent transforms",
+    "anchors": {
+      "origin": [
+        0,
+        0,
+        0
+      ]
+    },
+    "materials": [
+      "Paint ivory",
+      "Shutters forest black",
+      "Tire rubber",
+      "Van faded teal",
+      "v03 brushed metal",
+      "v03 rear red lens",
+      "v03 vehicle smoked glazing",
+      "v03 warm lamp"
+    ],
+    "lod": "conceptual_detail",
+    "dependencies": [],
+    "evidence": "illustration guided; dimensions inferred"
+  },
+  {
+    "id": "MOVER Arbol 91",
+    "kind": "tree",
+    "version": "0.3",
+    "origin": [
+      -9.0,
+      -6.300000190734863,
+      0.0
+    ],
+    "dimensions_m": [
+      14.469488143920898,
+      9.642578601837158,
+      13.63291671872139
+    ],
+    "bounds_method": "editable mesh vertices and conservative curve control hulls with bevel radius, in world axes; scene-independent parent transforms",
+    "anchors": {
+      "origin": [
+        0,
+        0,
+        0
+      ]
+    },
+    "materials": [
+      "Ivory fairy lights",
+      "Shutters forest black",
+      "Tree bark muted brown"
+    ],
+    "lod": "conceptual_detail",
+    "dependencies": [],
+    "evidence": "illustration guided; dimensions inferred"
+  },
+  {
+    "id": "MOVER Arbol 92",
+    "kind": "tree",
+    "version": "0.3",
+    "origin": [
+      9.0,
+      -3.700000047683716,
+      0.0
+    ],
+    "dimensions_m": [
+      16.119324684143066,
+      11.214066743850708,
+      13.481786996126175
+    ],
+    "bounds_method": "editable mesh vertices and conservative curve control hulls with bevel radius, in world axes; scene-independent parent transforms",
+    "anchors": {
+      "origin": [
+        0,
+        0,
+        0
+      ]
+    },
+    "materials": [
+      "Ivory fairy lights",
+      "Shutters forest black",
+      "Tree bark muted brown"
+    ],
+    "lod": "conceptual_detail",
+    "dependencies": [],
+    "evidence": "illustration guided; dimensions inferred"
+  },
+  {
+    "id": "MOVER Arbol 93",
+    "kind": "tree",
+    "version": "0.3",
+    "origin": [
+      -12.0,
+      8.0,
+      0.0
+    ],
+    "dimensions_m": [
+      14.918575763702393,
+      10.698964595794678,
+      13.417243272066116
+    ],
+    "bounds_method": "editable mesh vertices and conservative curve control hulls with bevel radius, in world axes; scene-independent parent transforms",
+    "anchors": {
+      "origin": [
+        0,
+        0,
+        0
+      ]
+    },
+    "materials": [
+      "Tree bark muted brown"
+    ],
+    "lod": "conceptual_detail",
+    "dependencies": [],
+    "evidence": "illustration guided; dimensions inferred"
+  }
+]

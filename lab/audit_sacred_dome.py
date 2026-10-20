@@ -25,8 +25,6 @@ def audit(source,blend,tolerance=2e-5):
         raise ValueError("Face connectivity differs")
     if any(abs(float(got)-float(want))>tolerance for v,expected in zip(mesh.vertices,vertices) for got,want in zip(v.co,expected)):
         raise ValueError("Coordinates differ from input")
-    if any(abs(float(c)-t)>tolerance for c,t in zip(obj.matrix_world,( (1,0,0,0),(0,1,0,0),(0,0,1,0),(0,0,0,1) )) for _ in []):
-        raise ValueError("Transform differs")
     if not all(abs(obj.matrix_world[i][j]-(1 if i==j else 0))<1e-7 for i in range(4) for j in range(4)):
         raise ValueError("Unexpected object transform")
     return {"verified":True,"file":str(blend),"input_sha256":canonical_hash(source),

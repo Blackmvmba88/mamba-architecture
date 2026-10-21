@@ -11,7 +11,7 @@ def canonical_hash(document):
     return hashlib.sha256(payload.encode("utf-8")).hexdigest()
 
 def validate(document):
-    if document.get("kind")!="sacred_dome_p2" or document.get("units")!="m":
+    if document.get("schema_version")!="0.3.0" or document.get("kind")!="sacred_dome_p2" or document.get("units")!="m":
         raise ValueError("Expected sacred_dome_p2 document in meters")
     p=document["parameters"]
     n,rings=p["segments"],p["roof_rings"]
@@ -30,10 +30,20 @@ def validate(document):
     rise=p["roof_rise_m"]
     wall=p["wall_height_m"]
     ratio=p["oculus_ratio"]
-    if any(isinstance(x,bool) or not isinstance(x,(int,float)) or not math.isfinite(x) for x in (radius,rise,wall,ratio)):
+    door_width=p["door_width_m"]
+    if any(isinstance(x,bool) or not isinstance(x,(int,float)) or not math.isfinite(x) for x in (radius,rise,wall,ratio,door_width)):
         raise ValueError("Invalid parameters")
     if not (2<=radius<=40 and 2<=wall<=12 and 0.5<=rise<=20 and 0.05<=ratio<=0.5):
         raise ValueError("Parameters out of bounds")
+    if not (0.7<=door_width<=3) or door_width>=2*radius*math.sin(math.pi/n):
+        raise ValueError("Door width exceeds the valid conceptual wall bay")
+    expected_oculus=round(radius*ratio,6)
+    intent=document.get("design_intent",{})
+    if intent.get("oculus_radius_m")!=expected_oculus:
+        raise ValueError("Oculus intent does not match geometry")
+    door=intent.get("door",{})
+    if door.get("width_m")!=door_width or door.get("geometry_status")!="unmodeled":
+        raise ValueError("Door intent does not match geometry")
     for j in range(rings+1):
         r=radius*(1-(1-ratio)*j/rings)
         z=wall+rise*(1-(r/radius)**2)

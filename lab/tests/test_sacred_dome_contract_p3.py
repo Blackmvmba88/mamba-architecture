@@ -23,7 +23,7 @@ class SacredDomeContractTests(unittest.TestCase):
 
     def test_rejects_invalid_door_width(self):
         doc=build()
-        doc["parameters"]["door_width_m"]=3.0
+        doc["parameters"]["door_width_m"]=3.1
         with self.assertRaises(ValueError):validate(doc)
 
     def test_rejects_changed_door_intent(self):

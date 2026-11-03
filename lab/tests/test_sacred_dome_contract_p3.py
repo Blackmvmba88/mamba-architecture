@@ -16,6 +16,26 @@ class SacredDomeContractTests(unittest.TestCase):
         doc=build()
         doc["roof_mesh"]["quad_faces"][0]=[0,1,2,3]
         with self.assertRaises(ValueError):validate(doc)
+    def test_rejects_modified_schema(self):
+        doc=build()
+        doc["schema_version"]="0.4.0"
+        with self.assertRaises(ValueError):validate(doc)
+
+    def test_rejects_invalid_door_width(self):
+        doc=build()
+        doc["parameters"]["door_width_m"]=3.1
+        with self.assertRaises(ValueError):validate(doc)
+
+    def test_rejects_changed_door_intent(self):
+        doc=build()
+        doc["design_intent"]["door"]["width_m"]=0.8
+        with self.assertRaises(ValueError):validate(doc)
+
+    def test_rejects_changed_oculus_intent(self):
+        doc=build()
+        doc["design_intent"]["oculus_radius_m"]=4.0
+        with self.assertRaises(ValueError):validate(doc)
+
     def test_hash_is_deterministic(self):
         self.assertEqual(canonical_hash(build()),canonical_hash(deepcopy(build())))
 
